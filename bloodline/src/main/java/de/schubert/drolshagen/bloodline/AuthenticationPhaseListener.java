@@ -42,18 +42,27 @@ public class AuthenticationPhaseListener implements PhaseListener {
 		
 		String fowardTo = null;
 		
-		if (isSecureView(viewId)) {
-			User user = (User) context.getExternalContext().getSessionMap().get(Login.LOGGED_IN_USER_KEY);			
-			if (user == null) {
-				// user is not logged in
-				fowardTo = "/login.xhtml";
+		if (isLoggedIn()) {
+			if (viewId.equals("/login.xhtml")) {
+				fowardTo = "/home.xhtml";
 			}
 		}
+		else {
+			if (isSecureView(viewId)) {				
+				// user is not logged in
+				fowardTo = "/login.xhtml";				
+			}
+		}		
+		
 		if (fowardTo != null) {
 			// rendered response will contain foward to page
 			context.getApplication().getNavigationHandler().handleNavigation(context, null, fowardTo);
 		}		
 		
+	}
+	
+	public boolean isLoggedIn() {
+		return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(Login.LOGGED_IN_USER_KEY) != null;			
 	}
 	
 	/**

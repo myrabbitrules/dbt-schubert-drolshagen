@@ -11,14 +11,15 @@
 <h:body>
 	<div id="container">
 		<div id="content">
-			<h:messages />
-			<h:form>
+			<h:messages globalOnly="true"/>
+			<h:form id="login_form">
 				<div class="pair">
 					<div class="left">
 					<h:outputText value="username:" />
 					</div>
 					<div class="right">
-						<h:inputText value="#{credentials.username}" />
+						<h:inputText id="username" value="#{credentials.username}" />
+						<h:message for="username" errorClass="pair_invalid"/>
 					</div>
 				</div>
 				<div class="pair">
@@ -26,14 +27,17 @@
 						<h:outputText value="password:" />
 					</div>
 					<div class="right">
-						<h:inputSecret value="#{credentials.password}" />
+						<h:inputSecret id="password" value="#{credentials.password}" />
+						<h:message for="password" errorClass="pair_invalid"/>
 					</div>
 				</div>					
 				<div class="list_horizontal">
 					<h:commandButton action="#{login.login}" value="login" />
 				</div>
 				<div class="list_horizontal">
-					<h:commandButton action="registration.xhtml" value="registration" />
+					<h:outputLink value="registration.jsf" class="no_deco">
+						<input type="button" value="registration"/>
+					</h:outputLink>
 				</div>				
 			</h:form>
 			

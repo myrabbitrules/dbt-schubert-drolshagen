@@ -26,3 +26,9 @@ div.list_horizontal
 	margin: 5px;
 }
 
+.no_deco
+{
+	text-decoration: none;
+}
+
+

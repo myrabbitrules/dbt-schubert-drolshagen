@@ -8,9 +8,10 @@ import javax.validation.constraints.*;
 @Named
 public class Credentials {
 	
-	
+	@NotNull(message = "Please enter username.")
 	private String username;
 		
+	@NotNull(message = "Please enter password.")
 	private String password;
 	
 	public String getUsername() {

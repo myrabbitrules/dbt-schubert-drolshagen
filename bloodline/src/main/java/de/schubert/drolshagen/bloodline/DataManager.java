@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-@Stateless
+@Stateless // we want automatic transaction demarcation
 public class DataManager {
 
 	@Inject
@@ -22,6 +22,42 @@ public class DataManager {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean addDisease(Disease disease) {
+		if (!diseaseExists(disease)) {
+			em.persist(disease);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean addPerson(Person person) {
+		if (!personExists(person)) {
+			em.persist(person);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean addGeneInfo(GeneInfo geneInfo) {
+		if (!geneInfoExists(geneInfo)) {
+			em.persist(geneInfo);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean geneInfoExists(GeneInfo geneInfo) {
+		return em.find(GeneInfo.class, geneInfo.getId()) != null;
+	}
+	
+	public boolean personExists(Person person) {
+		return em.find(Person.class, person.getId()) != null;
+	}
+	
+	public boolean diseaseExists(Disease disease) {
+		return em.find(Disease.class, disease.getId()) != null;		
 	}
 	
 	public boolean userExists(String username) {

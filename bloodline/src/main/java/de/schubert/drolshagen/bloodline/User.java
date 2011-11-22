@@ -1,17 +1,23 @@
 package de.schubert.drolshagen.bloodline;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 @NamedQuery(name = User.QUERY_GET_PASSWORD, query = "select u.password from User u where u.username = :username")
+@Table(name = "user")
 @Entity
 public class User {
 	
 	public static final String QUERY_GET_PASSWORD = "User.getPassword";
 	
 	@Id
+	@Column(name = "username")
 	private String username;
+	
+	@Column(name = "password", nullable = false)
 	private String password;
 	
 	// default constructor required by JPA

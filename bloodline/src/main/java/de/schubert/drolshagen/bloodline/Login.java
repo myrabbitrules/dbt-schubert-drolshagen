@@ -3,10 +3,14 @@ package de.schubert.drolshagen.bloodline;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+
 
 @SessionScoped
 @Named
@@ -41,6 +45,22 @@ public class Login implements Serializable {
 		if (isLoggedIn()) {
 			return null;
 		}
+		/*Disease disease = new Disease("pest", true);
+		dataManager.addDisease(disease);
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(1989, Calendar.MAY, 31);
+		Date date = calendar.getTime();
+		Person mutter = new Person("Schubert", "Ulrike", date, false, null, null);
+		Person person = new Person("Schubert", "Richard", date, true, null, mutter);
+		
+		GeneInfo geneInfo = new GeneInfo(person, disease, false, true);	
+		
+		dataManager.addPerson(mutter);
+		dataManager.addPerson(person);
+		
+		dataManager.addGeneInfo(geneInfo);*/
+		
 		// fetch user from database
 		User user = dataManager.getUser(credentials.getUsername());
 		if (user != null) {
@@ -54,12 +74,12 @@ public class Login implements Serializable {
 				FacesContext.getCurrentInstance().addMessage(null, message);
 				return "home.xhtml";
 			}
-			FacesMessage message = new FacesMessage("Incorrect password.");
-			FacesContext.getCurrentInstance().addMessage(null, message);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Incorrect password.");
+			FacesContext.getCurrentInstance().addMessage("login_form:password", message);
 		}
 		else {
-			FacesMessage message = new FacesMessage("User does not exist.");
-			FacesContext.getCurrentInstance().addMessage(null, message);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "User does not exist.");
+			FacesContext.getCurrentInstance().addMessage("login_form:username", message);
 		}		
 		return null;
 	}
@@ -67,13 +87,15 @@ public class Login implements Serializable {
 	/**
 	 * Log out user if user is logged in.
 	 */
-	public void logout() {	
+	public String logout() {	
 		if (loggedInUser != null) {
 			FacesMessage message = new FacesMessage("Goodbye " + loggedInUser.getUserName());
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			loggedInUser = null;
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove(LOGGED_IN_USER_KEY);
+			return "login.xhtml";
 		}		
+		return null;
 	}
 	
 	/**
