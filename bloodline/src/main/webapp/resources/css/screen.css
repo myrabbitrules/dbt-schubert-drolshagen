@@ -9,6 +9,12 @@ div.right
 	
 }
 
+.pair_invalid
+{
+	margin-left: 10px;
+	color: red;	
+}
+
 div.pair
 {
 	margin: 8px;
@@ -19,3 +25,4 @@ div.list_horizontal
 	float: left;
 	margin: 5px;
 }
+

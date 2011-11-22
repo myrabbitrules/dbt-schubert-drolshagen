@@ -7,6 +7,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.Size;
 
 @RequestScoped
 @Named
@@ -19,7 +20,10 @@ public class Registration {
 	Logger logger;
 
 	private String username;
+	
+	@Size(min = 5, max = 20, message = "number of characters must be between 5 and 20")
 	private String password;
+	
 	private String passwordConfirm;
 	
 	public String register() {

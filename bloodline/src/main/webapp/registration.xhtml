@@ -12,7 +12,7 @@
 <h:body>
 	<div id="container">
 		<div id="content">
-			<h:messages />
+			<!-- <h:messages /> -->
 			<h:form>
 				<div class="pair">
 					<div class="left">
@@ -24,10 +24,11 @@
 				</div>
 				<div class="pair">
 					<div class="left">
-						<h:outputText value="password:" />
+						<h:outputText value="password:" />						
 					</div>				
 					<div class="right">
-						<h:inputSecret value="#{registration.password}" />
+						<h:inputSecret id="password" value="#{registration.password}" />
+						<h:message for="password" errorClass="pair_invalid"/>
 					</div>
 				</div>	
 				<div class="pair">

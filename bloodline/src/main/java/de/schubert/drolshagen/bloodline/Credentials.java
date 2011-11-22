@@ -2,12 +2,15 @@ package de.schubert.drolshagen.bloodline;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.validation.constraints.*;
 
 @RequestScoped
 @Named
 public class Credentials {
 	
+	
 	private String username;
+		
 	private String password;
 	
 	public String getUsername() {
