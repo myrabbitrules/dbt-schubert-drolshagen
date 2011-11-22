@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<h:outputStylesheet name="css/screen.css" />
+</h:head>
+<h:body>
+	<div id="container">
+		<div id="content">
+			<h:messages />
+			<h:form>
+				<div class="pair">
+					<div class="left">
+					<h:outputText value="username:" />
+					</div>
+					<div class="right">
+						<h:inputText value="#{credentials.username}" />
+					</div>
+				</div>
+				<div class="pair">
+					<div class="left">
+						<h:outputText value="password:" />
+					</div>
+					<div class="right">
+						<h:inputSecret value="#{credentials.password}" />
+					</div>
+				</div>					
+				<div class="list_horizontal">
+					<h:commandButton action="#{login.login}" value="login" />
+				</div>
+				<div class="list_horizontal">
+					<h:commandButton action="registration.xhtml" value="registration" />
+				</div>				
+			</h:form>
+			
+		</div>	
+	</div>
+</h:body>
+</html>

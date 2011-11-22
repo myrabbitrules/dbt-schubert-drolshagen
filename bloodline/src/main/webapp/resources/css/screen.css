@@ -1,0 +1,21 @@
+div.left
+{
+	float: left;
+	width: 90px;
+}
+
+div.right
+{
+	
+}
+
+div.pair
+{
+	margin: 8px;
+}
+
+div.list_horizontal
+{
+	float: left;
+	margin: 5px;
+}

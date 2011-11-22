@@ -1,0 +1,1 @@
+insert into User (username, password) values ('myrabbitrules', 'augenher') 
