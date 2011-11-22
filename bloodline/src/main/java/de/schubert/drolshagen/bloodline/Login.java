@@ -14,6 +14,9 @@ public class Login implements Serializable {
 
 	private static final long serialVersionUID = -5294160758110334070L;
 	
+	/**
+	 * key for logged in user data in session map
+	 */
 	public static final String LOGGED_IN_USER_KEY = "de.schubert.drolshagen.bloodline.loggedin";
 	
 	@Inject	
