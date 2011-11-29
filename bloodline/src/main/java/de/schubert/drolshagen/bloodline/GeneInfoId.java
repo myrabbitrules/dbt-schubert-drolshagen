@@ -17,7 +17,7 @@ public class GeneInfoId implements Serializable {
 	private Person person;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "desease", nullable = false)
+	@JoinColumn(name = "disease", nullable = false)
 	private Disease disease;
 
 	public Person getPerson() {

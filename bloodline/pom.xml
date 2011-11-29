@@ -15,13 +15,13 @@
 			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
+	
 	<!-- Include the JBoss Maven repository so we can access JBoss artifacts -->
 	<repositories>
 		<repository>
 			<id>jboss-public-repository</id>
 			<name>JBoss Repository</name>
-			<url>https://repository.jboss.org/nexus/content/groups/public</url>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -35,7 +35,7 @@
 		<pluginRepository>
 			<id>jboss-public-repository</id>
 			<name>JBoss Repository</name>
-			<url>https://repository.jboss.org/nexus/content/groups/public</url>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -65,10 +65,19 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+					
 		</dependencies>
 	</dependencyManagement>
 
-	<dependencies>
+	<dependencies>	
+	        
+         <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>6.0</version>
+            <scope>provided</scope>
+        </dependency>
+        
 
 		<!-- JSR-303 (Bean Validation) Implementation -->
 		<!-- Provides portable constraints such as @Email -->

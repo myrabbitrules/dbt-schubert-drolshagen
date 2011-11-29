@@ -1,5 +1,6 @@
 package de.schubert.drolshagen.bloodline;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +12,37 @@ import javax.inject.Named;
 
 @Named
 @RequestScoped
-public class Insertion {
+public class PersonInsertion {
+	
+	public class DiseaseInfo {
+		private Disease disease;
+		private boolean xIntact;
+		private boolean xyIntact;
+		
+		public DiseaseInfo() {
+			
+		}			
+		
+		public Disease getDisease() {
+			return disease;
+		}
+		public void setDisease(Disease disease) {
+			this.disease = disease;
+		}
+		public boolean isxIntact() {
+			return xIntact;
+		}
+		public void setxIntact(boolean xIntact) {
+			this.xIntact = xIntact;
+		}
+		public boolean isxyIntact() {
+			return xyIntact;
+		}
+		public void setxyIntact(boolean xyIntact) {
+			this.xyIntact = xyIntact;
+		}
+		
+	}
 	
 	@Inject	
 	private DataManager dataManager;
@@ -34,14 +65,15 @@ public class Insertion {
 	
 	private Integer year;
 	
-	private List<Disease> diseases;
-	
-	public List<Disease> getDiseases() {
-		return diseases;
+	private List<DiseaseInfo> diseaseInfos;
+
+
+	public List<DiseaseInfo> getDiseaseInfos() {
+		return diseaseInfos;
 	}
 
-	public void setDiseases(List<Disease> diseases) {
-		this.diseases = diseases;
+	public void setDiseaseInfos(List<DiseaseInfo> diseaseInfos) {
+		this.diseaseInfos = diseaseInfos;
 	}
 
 	public Integer getDay() {
@@ -70,9 +102,12 @@ public class Insertion {
 	
 	@PostConstruct
 	public void init() {
-		dataManager.addDisease(new Disease("pest", true));
-		dataManager.addDisease(new Disease("grippe", false));
-		diseases = dataManager.getDiseases();
+		diseaseInfos = new ArrayList<PersonInsertion.DiseaseInfo>();
+		for (Disease disease : dataManager.getDiseases()) {
+			DiseaseInfo diseaseInfo = new DiseaseInfo();
+			diseaseInfo.setDisease(disease);
+			diseaseInfos.add(diseaseInfo);
+		}
 	}
 
 	public String createPerson() {
@@ -88,7 +123,17 @@ public class Insertion {
 		Person mother = dataManager.getPerson(motherId);
 		person.setFather(father);
 		person.setMother(mother);
+		person.setMale(isMale);
 		dataManager.addPerson(person);
+		
+		for (DiseaseInfo diseaseInfo : diseaseInfos) {
+			GeneInfo geneInfo = new GeneInfo(person, diseaseInfo.disease, diseaseInfo.xIntact, diseaseInfo.xyIntact);
+			dataManager.addGeneInfo(geneInfo);
+		}
+		
+		
+		
+		
 		return null;
 	}
 
