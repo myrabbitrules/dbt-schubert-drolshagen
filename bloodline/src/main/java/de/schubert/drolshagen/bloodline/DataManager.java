@@ -1,5 +1,6 @@
 package de.schubert.drolshagen.bloodline;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
@@ -73,5 +74,15 @@ public class DataManager {
 	
 	public User getUser(String username) {
 		return em.find(User.class, username);
+	}
+	
+	public Person getPerson(int id) {
+		return em.find(Person.class, id);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Disease> getDiseases() {
+		Query query = em.createNamedQuery(Disease.QUERY_GET_ALL);
+		return query.getResultList();
 	}
 }

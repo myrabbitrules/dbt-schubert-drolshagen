@@ -1,7 +1,7 @@
 div.left
 {
 	float: left;
-	width: 110px;
+	width: 90px;
 }
 
 div.right
@@ -24,11 +24,6 @@ div.list_horizontal
 {
 	float: left;
 	margin: 5px;
-}
-
-div.input_horizontal
-{
-	float: left;
 }
 
 .no_deco

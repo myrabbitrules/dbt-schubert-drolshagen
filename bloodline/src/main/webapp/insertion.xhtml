@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<h:outputStylesheet name="css/screen.css" />
+</h:head>
+<h:body>
+	<div id="container">
+		<div id="content">
+			<h:messages globalOnly="true"/>
+			<h:form id="login_form">
+				<div class="pair">
+					<div class="left">
+					<h:outputText value="surname" />
+					</div>
+					<div class="right">
+						<h:inputText id="surname" value="#{insertion.surname}" />
+					</div>
+				</div>
+				<div class="pair">
+					<div class="left">
+						<h:outputText value="forename" />
+					</div>
+					<div class="right">
+						<h:inputText id="forename" value="#{insertion.forename}" />
+					</div>
+				</div>
+				<div class="pair">
+					<div class="left">
+						<h:outputText value="birthdate" />
+					</div>
+					<div class="input_horizontal">
+						<h:inputText value="#{insertion.day}" size="5" />
+						<h:inputText value="#{insertion.month}" size="5"  />
+						<h:inputText value="#{insertion.year}" size="5"  />						
+					</div>
+				</div>	
+				<div style="clear: both"/>
+				<div class="pair">
+					<div class="left">
+						<h:outputText value="male" />
+					</div>
+					<div class="right">
+						<h:selectBooleanCheckbox value="#{insertion.male}" />
+					</div>
+				</div>	
+				<div class="pair">
+					<div class="left">
+						<h:outputText value="id father" />
+					</div>
+					<div class="right">
+						<h:inputText value="#{insertion.fatherId}" />
+					</div>
+				</div>	
+				<div class="pair">
+					<div class="left">
+						<h:outputText value="id mother" />
+					</div>
+					<div class="right">
+						<h:inputText value="#{insertion.motherId}" />
+					</div>
+				</div>					
+				
+					<ui:repeat var="item" value="#{insertion.diseases}">
+						<fieldset style="width: 300px">
+							<legend>#{item.name}</legend>
+							<div class="pair">
+								<div class="left">
+									<h:outputText value="x-chromosome" />
+								</div>
+								<div class="right">
+									<h:selectBooleanCheckbox />
+								</div>
+							</div>	
+							<div class="pair">
+								<div class="left">
+									<h:outputText value="xy-chromosome" />
+								</div>
+								<div class="right">
+									<h:selectBooleanCheckbox />
+								</div>
+							</div>			
+						</fieldset>
+											
+					</ui:repeat>
+								
+							
+				<div class="list_horizontal">					
+					<h:commandButton action="#{insertion.createPerson()}" value="create person" />
+				</div>
+			</h:form>
+			
+		</div>	
+	</div>
+</h:body>
+</html>

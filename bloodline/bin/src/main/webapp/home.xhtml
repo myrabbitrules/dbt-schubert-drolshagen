@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	<!-- display content of template -->
+	<ui:define name="content">	<!-- insert this into template where matching insert tags are found -->
+		<h:form>
+			<h:messages />
+			<h:commandButton action="#{login.logout}" value="logout" rendered="#{login.loggedIn}" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+
+
