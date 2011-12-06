@@ -3,11 +3,18 @@ package de.schubert.drolshagen.bloodline;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Table(name = "gene_info")
 @Entity
+@NamedQueries({
+	@NamedQuery(name = GeneInfo.QUERY_GET_ALL_BY_PERSON, query = "select gi from GeneInfo gi where gi.id.person = :person")
+})
 public class GeneInfo {
+	
+	public static final String QUERY_GET_ALL_BY_PERSON = "GeneInfo.getAllByPerson" ;
 
 	@EmbeddedId
 	private GeneInfoId id;
@@ -17,6 +24,10 @@ public class GeneInfo {
 	
 	@Column(name = "xy_intact", nullable = false)
 	private boolean xyIntact;
+	
+	public GeneInfo() {
+		
+	}
 	
 	public GeneInfo(Person person, Disease disease, boolean xintact, boolean xyIntact) {
 		GeneInfoId id = new GeneInfoId();

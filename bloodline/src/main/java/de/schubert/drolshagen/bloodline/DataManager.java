@@ -41,6 +41,25 @@ public class DataManager {
 		return false;
 	}
 	
+	public boolean addPerson(Person person, int fatherId, int motherId) {
+		Person father = getPerson(fatherId);
+		Person mother = getPerson(motherId);
+		person.setFather(father);
+		person.setMother(mother);
+		em.persist(person);
+		return true;
+	}
+	
+	public List<GeneInfo> getGeneInfos(Person person) {
+		em.merge(person);
+		Query query = em.createNamedQuery(GeneInfo.QUERY_GET_ALL_BY_PERSON);
+		query.setParameter("person", person);
+		@SuppressWarnings("unchecked")
+		List<GeneInfo> res = query.getResultList();
+		
+		return res;
+	}
+	
 	public boolean addGeneInfo(GeneInfo geneInfo) {
 		if (!geneInfoExists(geneInfo)) {
 			em.persist(geneInfo);

@@ -2,6 +2,7 @@ package de.schubert.drolshagen.bloodline;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,11 +36,11 @@ public class Person {
 	@Column(name = "is_male", nullable = false)
 	private boolean isMale;
 		
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "father")
 	private Person father;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "mother")
 	private Person mother;
 	
@@ -115,6 +116,26 @@ public class Person {
 		this.mother = mother;
 	}
 
+	public int calcDepth() {
+		// Nimmt die Personen welche verwandt sind einfach als folgende an
+		int lDepth = 0;
+		int rDepth = 0;
+
+		// Vater == Links
+		if(this.getFather() != null){
+			lDepth = this.getFather().calcDepth();
+		}
+		
+		// Mutter == Rechts
+		if(this.getMother() != null){
+			rDepth = this.getMother().calcDepth();
+		}
+		if(lDepth >= rDepth){
+			return lDepth +1;   
+		} else {
+			return rDepth + 1;
+		} 
+	}
 	
 	
 }

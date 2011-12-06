@@ -12,11 +12,11 @@ public class GeneInfoId implements Serializable {
 
 	private static final long serialVersionUID = 6781473968730496803L;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name = "person", nullable = false)
 	private Person person;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name = "disease", nullable = false)
 	private Disease disease;
 
