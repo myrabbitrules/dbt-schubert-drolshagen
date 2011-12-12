@@ -51,24 +51,24 @@ public class DiseaseCalc {
 	
 	private List<DiseaseResult> diseaseResults;
 
-	private int fatherId;
-	private int motherId;
+	private Integer fatherId;
+	private Integer motherId;
 	
 	@PostConstruct
 	public void init() {
 		diseaseResults = new ArrayList<DiseaseCalc.DiseaseResult>();
 	}
 	
-	public int getFatherId() {
+	public Integer getFatherId() {
 		return fatherId;
 	}
-	public void setFatherId(int fatherId) {
+	public void setFatherId(Integer fatherId) {
 		this.fatherId = fatherId;
 	}
-	public int getMotherId() {
+	public Integer getMotherId() {
 		return motherId;
 	}
-	public void setMotherId(int motherId) {
+	public void setMotherId(Integer motherId) {
 		this.motherId = motherId;
 	}
 	
@@ -96,10 +96,10 @@ public class DiseaseCalc {
 			diseaseResults.add(diseaseRes);
 			
 			if (disease.isDominant()) {				
-				if (motherInfo.isxIntact()) {
-					if (motherInfo.isXyIntact()) {
+				if (!motherInfo.isxDefective()) {
+					if (!motherInfo.isXyDefective()) {
 						diseaseRes.malePropability = 0;
-						if (fatherInfo.isxIntact()) {
+						if (!fatherInfo.isxDefective()) {
 							diseaseRes.femalePropability = 0;
 						}
 						else {
@@ -108,7 +108,7 @@ public class DiseaseCalc {
 					}
 					else {
 						diseaseRes.malePropability = 0.5;
-						if (fatherInfo.isxIntact()) {
+						if (!fatherInfo.isxDefective()) {
 							diseaseRes.femalePropability = 0.5;
 						}
 						else {
@@ -117,9 +117,9 @@ public class DiseaseCalc {
 					}
 				}
 				else {
-					if (motherInfo.isXyIntact()) {
+					if (!motherInfo.isXyDefective()) {
 						diseaseRes.malePropability = 0.5;
-						if (fatherInfo.isxIntact()) {
+						if (!fatherInfo.isxDefective()) {
 							diseaseRes.femalePropability = 0.5;
 						}
 						else {
@@ -134,12 +134,12 @@ public class DiseaseCalc {
 			}
 			else { // recessive
 				diseaseRes.malePropability = 0;
-				if (fatherInfo.isxIntact()) {
+				if (!fatherInfo.isxDefective()) {
 					diseaseRes.femalePropability = 0;
 				}
 				else {
-					if (motherInfo.isxIntact()) {						
-						if (motherInfo.isXyIntact()) {
+					if (!motherInfo.isxDefective()) {						
+						if (!motherInfo.isXyDefective()) {
 							diseaseRes.femalePropability = 0;
 						}
 						else {
@@ -147,7 +147,7 @@ public class DiseaseCalc {
 						}
 					}
 					else {
-						if (motherInfo.isXyIntact()) {
+						if (!motherInfo.isXyDefective()) {
 							diseaseRes.femalePropability = 0.5;
 						}
 						else {
@@ -157,10 +157,9 @@ public class DiseaseCalc {
 				}
 			}
 		}
+		fatherId = null;
+		motherId = null;
 		
-		
-		
-	}
-	
+	}	
 	
 }

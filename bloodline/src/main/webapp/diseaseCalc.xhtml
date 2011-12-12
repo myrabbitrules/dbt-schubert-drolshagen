@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<h:outputStylesheet name="css/screen.css" />
+</h:head>
+<h:body>
+	<div id="container">
+		<div id="content">
+			<h:messages globalOnly="true"/>
+			<h:form id="person_insertion_form">
+				<div class="pair">
+					<div class="left">
+					<h:outputText value="father id" />
+					</div>
+					<div class="right">
+						<h:inputText id="fatherId" value="#{diseaseCalc.fatherId}" />
+					</div>
+				</div>							
+				<div class="pair">
+					<div class="left">
+					<h:outputText value="mother id" />
+					</div>
+					<div class="right">
+						<h:inputText id="motherId" value="#{diseaseCalc.motherId}" />
+					</div>
+				</div>		
+				<div class="list_horizontal">					
+					<h:commandButton action="#{diseaseCalc.calcDiseases()}" value="calculate diseases" />
+				</div>
+				<div style="clear: left"/>
+				<br/>
+				
+				<ui:repeat var="item" value="#{diseaseCalc.diseaseResults}">
+					<fieldset style="width: 300px">
+						<legend>#{item.disease.name} propabilities</legend>
+						<div class="pair">
+							<div class="left">
+								<h:outputText value="&#x2642;" />
+							</div>
+							<div class="right">
+								<h:outputText value="#{item.malePropability}" />
+							</div>
+						</div>
+						<div class="pair">
+							<div class="left">
+								<h:outputText value="&#x2640;" />
+							</div>
+							<div class="right">
+								<h:outputText value="#{item.femalePropability}" />
+							</div>
+						</div>
+					</fieldset>
+				</ui:repeat>
+								
+			</h:form>
+			
+		</div>	
+	</div>
+</h:body>
+</html>

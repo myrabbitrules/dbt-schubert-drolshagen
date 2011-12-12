@@ -87,7 +87,7 @@ public class AuthenticationPhaseListener implements PhaseListener {
 	 * @return the ids of all request life cycle phases to be intercepted
 	 */
 	public PhaseId getPhaseId() {
-		return PhaseId.RESTORE_VIEW;
+		return PhaseId.ANY_PHASE;// PhaseId.RESTORE_VIEW;
 	}
 
 }

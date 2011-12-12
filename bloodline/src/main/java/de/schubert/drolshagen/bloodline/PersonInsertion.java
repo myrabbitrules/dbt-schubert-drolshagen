@@ -15,31 +15,37 @@ import javax.inject.Named;
 public class PersonInsertion {
 	
 	public class DiseaseInfo {
+		
 		private Disease disease;
-		private boolean xIntact;
-		private boolean xyIntact;
+		private boolean xDefective;
+		private boolean xyDefective;
 		
 		public DiseaseInfo() {
 			
-		}			
-		
+		}
+
+		public boolean isxDefective() {
+			return xDefective;
+		}
+
+		public void setxDefective(boolean xDefective) {
+			this.xDefective = xDefective;
+		}
+
+		public boolean isXyDefective() {
+			return xyDefective;
+		}
+
+		public void setXyDefective(boolean xyDefective) {
+			this.xyDefective = xyDefective;
+		}
+
 		public Disease getDisease() {
 			return disease;
 		}
+
 		public void setDisease(Disease disease) {
 			this.disease = disease;
-		}
-		public boolean isxIntact() {
-			return xIntact;
-		}
-		public void setxIntact(boolean xIntact) {
-			this.xIntact = xIntact;
-		}
-		public boolean isxyIntact() {
-			return xyIntact;
-		}
-		public void setxyIntact(boolean xyIntact) {
-			this.xyIntact = xyIntact;
 		}
 		
 	}
@@ -133,12 +139,12 @@ public class PersonInsertion {
 		
 		
 		for (DiseaseInfo diseaseInfo : diseaseInfos) {
-			GeneInfo geneInfo = new GeneInfo(person, diseaseInfo.disease, diseaseInfo.xIntact, diseaseInfo.xyIntact);
+			GeneInfo geneInfo = new GeneInfo(person, diseaseInfo.disease, diseaseInfo.xDefective, diseaseInfo.xyDefective);
 			dataManager.addGeneInfo(geneInfo);
 		}
 		
-		
-		
+		setFatherId(null);
+		setMotherId(null);
 		
 		return null;
 	}

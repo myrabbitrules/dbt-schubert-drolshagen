@@ -19,23 +19,23 @@ public class GeneInfo {
 	@EmbeddedId
 	private GeneInfoId id;
 	
-	@Column(name = "x_intact", nullable = false)
-	private boolean xIntact;
+	@Column(name = "x_defective", nullable = false)
+	private boolean xDefective;
 	
-	@Column(name = "xy_intact", nullable = false)
-	private boolean xyIntact;
+	@Column(name = "xy_defective", nullable = false)
+	private boolean xyDefective;
 	
 	public GeneInfo() {
 		
 	}
 	
-	public GeneInfo(Person person, Disease disease, boolean xintact, boolean xyIntact) {
+	public GeneInfo(Person person, Disease disease, boolean xDefective, boolean xyDefective) {
 		GeneInfoId id = new GeneInfoId();
 		id.setPerson(person);
 		id.setDisease(disease);
 		this.id = id;
-		this.xIntact = xintact;
-		this.xyIntact = xyIntact;
+		this.xDefective = xDefective;
+		this.xyDefective = xyDefective;
 	}
 
 	public GeneInfoId getId() {
@@ -46,21 +46,20 @@ public class GeneInfo {
 		this.id = id;
 	}
 
-	public boolean isxIntact() {
-		return xIntact;
+	public boolean isxDefective() {
+		return xDefective;
 	}
 
-	public void setxIntact(boolean xIntact) {
-		this.xIntact = xIntact;
+	public void setxDefective(boolean xDefective) {
+		this.xDefective = xDefective;
 	}
 
-	public boolean isXyIntact() {
-		return xyIntact;
+	public boolean isXyDefective() {
+		return xyDefective;
 	}
 
-	public void setXyIntact(boolean xyIntact) {
-		this.xyIntact = xyIntact;
+	public void setXyDefective(boolean xyDefective) {
+		this.xyDefective = xyDefective;
 	}
-	
 	
 }
