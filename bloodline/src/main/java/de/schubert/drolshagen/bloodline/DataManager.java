@@ -36,11 +36,11 @@ public class DataManager {
 	public boolean addPerson(Person person) {
 		if (!personExists(person)) {
 			if (person.hasFather()) {
-				em.merge(person.getFather());
+				person.setFather(em.merge(person.getFather()));
 			}
 			if (person.hasMother()) {
-				em.merge(person.getMother());
-			}
+				person.setMother(em.merge(person.getMother()));
+			}			
 			em.persist(person);
 			return true;
 		}

@@ -1,5 +1,6 @@
 package de.schubert.drolshagen.bloodline;
 
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,10 +23,15 @@ public class TreeCreation {
 	@Inject
 	private DataManager dataManager;
 	
-	private Person root = null;
+	private Person rootPerson = null;
 	private int personId;
-	private List<Person> personList;
-		
+	//private List<Person> personList;
+	private PersonTree personTree;
+	private Dimension panelDim;
+	
+	private static final Dimension elementDim = new Dimension(50, 25); // in px
+	private static final Dimension gapDim = new Dimension(50, 80); // in px
+	
 	public void getNextPerson() {
 	}
 
@@ -37,34 +43,17 @@ public class TreeCreation {
 		this.personId = personId;
 	}
 	
-	private void fillPersonList() {
-		personList.add(root);
-		int currPos = 0;
-		int lastNotNullPos = currPos;
-		
-		while (currPos <= lastNotNullPos) {
-			Person currPerson = personList.get(currPos);
-			personList.add(currPerson.getFather());
-			personList.add(currPerson.getMother());
-			if (currPerson.hasMother()) {
-				lastNotNullPos = personList.size() - 1;
-			}
-			else if (currPerson.hasFather()) {
-				lastNotNullPos = personList.size() - 2;
-			}
-			currPos++;
-		}
-		
-		for (Person person : personList) {
-			System.out.println(person + ", ");
-		}
-		
+	private void calcPanelDim() {
+		int width = personTree.getBottomElemCount() * (elementDim.width + gapDim.width);
+		int height = personTree.getLevelCount() * (elementDim.height + gapDim.height);
+		panelDim = new Dimension(width, height);	
 	}
 	
 	public String createTree() {
 		setRoot(dataManager.getPerson(personId));
-		personList = new LinkedList<Person>();
-		fillPersonList();
+		personTree = new PersonTree();
+		personTree.fill(rootPerson);
+		calcPanelDim();
 		
 		
 	/*	JFrame f = new JFrame();
@@ -87,11 +76,19 @@ public class TreeCreation {
 	}
 
 	public Person getRoot() {
-		return root;
+		return rootPerson;
 	}
 
 	public void setRoot(Person root) {
-		this.root = root;
+		this.rootPerson = root;
+	}
+
+	public Dimension getPanelDim() {
+		return panelDim;
+	}
+
+	public void setPanelDim(Dimension panelDim) {
+		this.panelDim = panelDim;
 	}
 	
 }
