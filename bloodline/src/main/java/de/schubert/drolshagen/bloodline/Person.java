@@ -115,6 +115,19 @@ public class Person {
 	public void setMother(Person mother) {
 		this.mother = mother;
 	}
+	
+	public boolean hasFather() {
+		return father != null;
+	}
+	
+	public boolean hasMother() {
+		return mother != null;
+	}
+	
+	@Override
+	public String toString() {
+		return "(" + forename + " " + sirname + ")";
+	}
 
 	public int calcDepth() {
 		// Nimmt die Personen welche verwandt sind einfach als folgende an

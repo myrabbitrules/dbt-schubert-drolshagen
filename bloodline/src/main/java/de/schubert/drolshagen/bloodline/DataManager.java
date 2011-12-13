@@ -35,20 +35,26 @@ public class DataManager {
 	
 	public boolean addPerson(Person person) {
 		if (!personExists(person)) {
+			if (person.hasFather()) {
+				em.merge(person.getFather());
+			}
+			if (person.hasMother()) {
+				em.merge(person.getMother());
+			}
 			em.persist(person);
 			return true;
 		}
 		return false;
 	}
 	
-	public boolean addPerson(Person person, int fatherId, int motherId) {
+	/*public boolean addPerson(Person person, int fatherId, int motherId) {
 		Person father = getPerson(fatherId);
 		Person mother = getPerson(motherId);
 		person.setFather(father);
 		person.setMother(mother);
 		em.persist(person);
 		return true;
-	}
+	}*/
 	
 	public List<GeneInfo> getGeneInfos(Person person) {
 		em.merge(person);
@@ -95,6 +101,11 @@ public class DataManager {
 		return em.find(User.class, username);
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return null if person does not exist
+	 */
 	public Person getPerson(int id) {
 		return em.find(Person.class, id);
 	}

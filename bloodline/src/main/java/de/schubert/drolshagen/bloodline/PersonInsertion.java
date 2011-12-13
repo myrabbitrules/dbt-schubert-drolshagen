@@ -125,18 +125,13 @@ public class PersonInsertion {
 		calendar.set(Calendar.MONTH, month);
 		calendar.set(Calendar.YEAR, year);
 		person.setBirthDate(calendar.getTime());
-		/*Person father = dataManager.getPerson(fatherId);
+		person.setMale(isMale);
+		Person father = dataManager.getPerson(fatherId);
 		Person mother = dataManager.getPerson(motherId);
 		person.setFather(father);
-		person.setMother(mother);*/
-		person.setMale(isMale);
-		if (fatherId != null && motherId != null) {
-			dataManager.addPerson(person, fatherId, motherId);
-		}
-		else {
-			dataManager.addPerson(person);
-		}
+		person.setMother(mother);
 		
+		dataManager.addPerson(person);
 		
 		for (DiseaseInfo diseaseInfo : diseaseInfos) {
 			GeneInfo geneInfo = new GeneInfo(person, diseaseInfo.disease, diseaseInfo.xDefective, diseaseInfo.xyDefective);

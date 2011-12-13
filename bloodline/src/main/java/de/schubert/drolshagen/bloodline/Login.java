@@ -45,22 +45,7 @@ public class Login implements Serializable {
 		if (isLoggedIn()) {
 			return null;
 		}
-		/*Disease disease = new Disease("pest", true);
-		dataManager.addDisease(disease);
-		
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(1989, Calendar.MAY, 31);
-		Date date = calendar.getTime();
-		Person mutter = new Person("Schubert", "Ulrike", date, false, null, null);
-		Person person = new Person("Schubert", "Richard", date, true, null, mutter);
-		
-		GeneInfo geneInfo = new GeneInfo(person, disease, false, true);	
-		
-		dataManager.addPerson(mutter);
-		dataManager.addPerson(person);
-		
-		dataManager.addGeneInfo(geneInfo);*/
-		
+				
 		// fetch user from database
 		User user = dataManager.getUser(credentials.getUsername());
 		if (user != null) {
