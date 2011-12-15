@@ -4,11 +4,6 @@ import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
 
 import javax.enterprise.context.RequestScoped;
 import javax.imageio.ImageIO;
@@ -27,11 +22,26 @@ public class TreeCreation {
 	private int personId;
 	//private List<Person> personList;
 	private PersonTree personTree;
-	private Dimension panelDim;
 	
 	private static final Dimension elementDim = new Dimension(50, 25); // in px
 	private static final Dimension gapDim = new Dimension(50, 80); // in px
+	private static final Dimension panelBorder = new Dimension(50, 50);
 	
+	public Dimension getPanelDim() {
+		Dimension res = new Dimension();
+		res.width = personTree.getWidth() + panelBorder.width;
+		res.height = personTree.getHeight() + panelBorder.height;
+		return res;
+	}
+	
+	public Dimension getElementdim() {
+		return elementDim;
+	}
+
+	public Dimension getGapdim() {
+		return gapDim;
+	}
+
 	public void getNextPerson() {
 	}
 
@@ -41,19 +51,24 @@ public class TreeCreation {
 
 	public void setPersonId(int personId) {
 		this.personId = personId;
-	}
+	}	
 	
-	private void calcPanelDim() {
-		int width = personTree.getBottomElemCount() * (elementDim.width + gapDim.width);
-		int height = personTree.getLevelCount() * (elementDim.height + gapDim.height);
-		panelDim = new Dimension(width, height);	
+	public PersonTree getPersonTree() {
+		return personTree;
 	}
-	
+
+	public void setPersonTree(PersonTree personTree) {
+		this.personTree = personTree;
+	}
+
+	public Dimension getPanelborder() {
+		return panelBorder;
+	}
+
 	public String createTree() {
 		setRoot(dataManager.getPerson(personId));
-		personTree = new PersonTree();
-		personTree.fill(rootPerson);
-		calcPanelDim();
+		personTree = new PersonTree(rootPerson, elementDim, gapDim);
+		//calcPanelDim();
 		
 		
 	/*	JFrame f = new JFrame();
@@ -81,14 +96,6 @@ public class TreeCreation {
 
 	public void setRoot(Person root) {
 		this.rootPerson = root;
-	}
-
-	public Dimension getPanelDim() {
-		return panelDim;
-	}
-
-	public void setPanelDim(Dimension panelDim) {
-		this.panelDim = panelDim;
 	}
 	
 }

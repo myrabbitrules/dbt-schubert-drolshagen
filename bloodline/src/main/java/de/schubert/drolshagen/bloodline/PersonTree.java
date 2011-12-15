@@ -1,61 +1,154 @@
 package de.schubert.drolshagen.bloodline;
 
+import java.awt.Dimension;
 import java.util.LinkedList;
 import java.util.List;
 
 public class PersonTree {
 	
-	public PersonTree() {
-		persons = new LinkedList<Person>();
+	public class PersonPos {
+		private String name;
+		private Dimension position;
+		private PersonPos father;
+		private PersonPos mother;
+		
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		
+		public Dimension getPosition() {
+			return position;
+		}
+		public void setPosition(Dimension position) {
+			this.position = position;
+		}
+		public PersonPos getFather() {
+			return father;
+		}
+		public void setFather(PersonPos father) {
+			this.father = father;
+		}
+		public PersonPos getMother() {
+			return mother;
+		}
+		public void setMother(PersonPos mother) {
+			this.mother = mother;
+		}
+		
+		@Override
+		public String toString() {
+			return "(" + name + ", " + position + ")";
+		}
 	}
-
-	private List<Person> persons;
 	
+	private PersonPos rootPersonPos; // tree
+	private int currBottomPos = 0; 
+	private Dimension elementDim;
+	private Dimension gapDim;
+	private List<PersonPos> personList;
+	
+	public PersonTree(Person rootPerson, Dimension elementDim, Dimension gapDim) {		
+		this.elementDim = elementDim;
+		this.gapDim = gapDim;
+		rootPersonPos = buildPersonPos(rootPerson, 0);
+		//printTree(rootPersonPos);
+		buildPersonList(rootPersonPos);		
+	}
+	
+	private PersonPos buildPersonPos(Person person, int height) {		
+		PersonPos res = new PersonPos();
+		res.position = new Dimension();		
+		res.setName(person.getForename() + " " + person.getSirname());		
+		res.position.height = height;
+		if (person.hasFather() && person.hasMother()) {
+			int parentHeight = height + elementDim.height + gapDim.height;
+			res.setFather(buildPersonPos(person.getFather(), parentHeight));
+			res.setMother(buildPersonPos(person.getMother(), parentHeight));			
+			res.position.width = (res.father.position.width + res.mother.position.width) / 2;			
+		}
+		else {			
+			res.position.width = currBottomPos * (elementDim.width + gapDim.width);;
+			currBottomPos++;
+		}		
+		return res;
+	}
+	
+	private void buildPersonList(PersonPos rootPersonPos) {
+		personList = new LinkedList<PersonPos>();
+		personList.add(rootPersonPos);
+		int currPos = 0;
+		int lastNotNullPos = currPos;
+		
+		while (currPos <= lastNotNullPos) {
+			PersonPos currPerson = personList.get(currPos);
+			if (currPerson != null) {
+				personList.add(currPerson.getFather());
+				personList.add(currPerson.getMother());
+				if (currPerson.getMother() != null) {
+					lastNotNullPos = personList.size() - 1;
+				}
+				else if (currPerson.getFather() != null) {
+					lastNotNullPos = personList.size() - 2;
+				}
+			}
+			else {
+				personList.add(null);
+				personList.add(null);
+			}
+			
+			currPos++;
+		}	
+				
+		/* remove unnecessary null elements */		
+		
+		boolean onlyNullElements = true;
+		for (int i = personList.size() - 1; i >= personList.size() - getBottomElemCount(); i--) {
+			if (personList.get(i) != null) {
+				onlyNullElements = false;
+			}
+		}
+		if (onlyNullElements) {
+			int startBottomElemCount = getBottomElemCount();
+			for (int i = 0; i < startBottomElemCount; i++) {
+				personList.remove(personList.size() - 1);
+			}
+		}			
+	}
+		
 	public int getLevelCount() {
-		return (int) (Math.log(persons.size() + 1) / Math.log(2));
+		return (int) (Math.log(personList.size() + 1) / Math.log(2));
 	}
 	
 	public int getBottomElemCount() {
 		return (int) (Math.pow(2, getLevelCount() - 1));
 	}
 	
-	public void fill(Person root) {
-		persons.add(root);
-		int currPos = 0;
-		int lastNotNullPos = currPos;
-		
-		while (currPos <= lastNotNullPos) {
-			Person currPerson = persons.get(currPos);
-			if (currPerson != null) {
-				persons.add(currPerson.getFather());
-				persons.add(currPerson.getMother());
-				if (currPerson.hasMother()) {
-					lastNotNullPos = persons.size() - 1;
-				}
-				else if (currPerson.hasFather()) {
-					lastNotNullPos = persons.size() - 2;
-				}
-			}
-			else {
-				persons.add(null);
-				persons.add(null);
-			}
-			
-			currPos++;
-		}			
-		
-		/* remove unnecessary null elements */
-		
-		boolean onlyNullElements = true;
-		for (int i = persons.size() - 1; i > persons.size() - getBottomElemCount(); i--) {
-			if (persons.get(i) != null) {
-				onlyNullElements = false;
-			}
+	public int getHeight() {
+		return (getLevelCount() - 1) * (elementDim.height + gapDim.height);
+	}
+	
+	public int getWidth() {
+		return (getBottomElemCount() - 1) * (elementDim.width + gapDim.width);
+	}
+	
+	public List<PersonPos> getPersonList() {
+		return personList;
+	}
+
+	public void setPersonList(List<PersonPos> personList) {
+		this.personList = personList;
+	}
+
+	public void printTree(PersonPos personPos) {
+		System.out.println(personPos);
+		if (personPos.father != null) {
+			printTree(personPos.father);
 		}
-		if (onlyNullElements) {
-			for (int i = 0; i < getBottomElemCount(); i++) {
-				persons.remove(persons.size() - 1);
-			}
-		}			
+		if (personPos.mother != null) {
+			printTree(personPos.mother);
+		}
 	}
 }

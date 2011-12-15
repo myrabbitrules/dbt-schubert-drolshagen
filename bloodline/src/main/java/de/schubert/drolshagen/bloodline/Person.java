@@ -5,7 +5,6 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -22,29 +21,28 @@ public class Person {
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
-	
+
 	@Column(name = "sirname", nullable = false)
 	private String sirname;
-	
+
 	@Column(name = "forename", nullable = false)
 	private String forename;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "birth_date", nullable = false)
 	private Date birthDate;
-	
+
 	@Column(name = "is_male", nullable = false)
 	private boolean isMale;
-		
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "father")
 	private Person father;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "mother")
 	private Person mother;
-	
-	
+
 	public Person(String sirname, String forename, Date birthDate,
 			boolean isMale, Person father, Person mother) {
 		super();
@@ -57,7 +55,7 @@ public class Person {
 	}
 
 	public Person() {
-		
+
 	}
 
 	public int getId() {
@@ -115,18 +113,34 @@ public class Person {
 	public void setMother(Person mother) {
 		this.mother = mother;
 	}
-	
+
 	public boolean hasFather() {
 		return father != null;
 	}
-	
+
 	public boolean hasMother() {
 		return mother != null;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "(" + forename + " " + sirname + ")";
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof Person)) {
+			return false;
+		}
+		Person otherPerson = (Person) other;
+		return otherPerson.forename.equals(forename)
+				&& otherPerson.sirname.equals(sirname)
+				&& otherPerson.birthDate.equals(birthDate);
+	}
+	
+	@Override
+	public int hashCode() {
+		return forename.hashCode() + sirname.hashCode() + birthDate.hashCode();
 	}
 
 	public int calcDepth() {
@@ -135,20 +149,19 @@ public class Person {
 		int rDepth = 0;
 
 		// Vater == Links
-		if(this.getFather() != null){
+		if (this.getFather() != null) {
 			lDepth = this.getFather().calcDepth();
 		}
-		
+
 		// Mutter == Rechts
-		if(this.getMother() != null){
+		if (this.getMother() != null) {
 			rDepth = this.getMother().calcDepth();
 		}
-		if(lDepth >= rDepth){
-			return lDepth +1;   
+		if (lDepth >= rDepth) {
+			return lDepth + 1;
 		} else {
 			return rDepth + 1;
-		} 
+		}
 	}
-	
-	
+
 }

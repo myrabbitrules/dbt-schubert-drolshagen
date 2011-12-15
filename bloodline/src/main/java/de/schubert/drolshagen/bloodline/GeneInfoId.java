@@ -14,7 +14,7 @@ public class GeneInfoId implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "person", nullable = false)
 	private Person person;
-	
+
 	@OneToOne
 	@JoinColumn(name = "disease", nullable = false)
 	private Disease disease;
@@ -34,6 +34,20 @@ public class GeneInfoId implements Serializable {
 	public void setDisease(Disease desease) {
 		this.disease = desease;
 	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof GeneInfoId)) {
+			return false;
+		}
+		GeneInfoId otherGeneInf = (GeneInfoId) other;
+		return otherGeneInf.person.equals(person)
+				&& otherGeneInf.disease.equals(disease);
+	}
 	
-	
+	@Override
+	public int hashCode() {
+		return getPerson().hashCode() + getDisease().hashCode();
+	}
+
 }

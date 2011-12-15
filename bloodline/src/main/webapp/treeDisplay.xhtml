@@ -12,12 +12,22 @@
 <h:body>
 	<div id="container">
 		<div id="content">
-			<svg xmlns="http://www.w3.org/2000/svg" width="#{treeCreation.panelDim.width}px" height="#{treeCreation.panelDim.height}px">
-		      <circle fill="black" cx="250" cy="300" r="25" />
-		      <g stroke="red" >
-		        <line x1="0" y1="0" x2="300" y2="300"
-		        stroke-width="2"  />
-		      </g>
+			<svg xmlns="http://www.w3.org/2000/svg" 
+				width="#{treeCreation.personTree.width + 2 * treeCreation.panelborder.width}px"
+				height="#{treeCreation.personTree.height + 2 * treeCreation.panelborder.height}px">
+				
+				<ui:repeat var="personPos" value="#{treeCreation.personTree.personList}">
+					<circle fill="black"
+						cx="#{personPos.position.width + treeCreation.panelborder.width}"
+						cy="${personPos.position.height + treeCreation.panelborder.height}" r="5" />
+						
+					<text x="#{personPos.position.width + treeCreation.panelborder.width - treeCreation.elementdim.width / 2}"
+						y="#{personPos.position.height + treeCreation.panelborder.height}"
+						fill="black" font-size="10" font-family="Arial">
+						
+     					#{personPos.name}
+  					</text>
+				</ui:repeat>		      
 		    </svg>			
 		</div>	
 	</div>

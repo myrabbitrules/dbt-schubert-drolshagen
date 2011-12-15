@@ -64,5 +64,20 @@ public class Disease {
 		this.dominant = dominant;
 	}
 	
+	@Override
+	public boolean equals(Object other) {
+
+		if (!(other instanceof Disease)) {
+			return false;
+		}
+		Disease otherDisease = (Disease) other;
+		return otherDisease.name.equals(name);
+	}
+	
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
+	
 	
 }
