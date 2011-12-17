@@ -16,10 +16,24 @@
 				width="#{treeCreation.personTree.width + 2 * treeCreation.panelborder.width}px"
 				height="#{treeCreation.personTree.height + 2 * treeCreation.panelborder.height}px">
 				
+				<g stroke="#ffcc33">
+					<ui:repeat var="linePoints" value="#{treeCreation.personTree.linePoints}">
+					
+						
+							<line x1="#{linePoints.from.width + treeCreation.panelborder.width}"
+								y1="#{linePoints.from.height + treeCreation.panelborder.height}"
+								x2="#{linePoints.to.width + treeCreation.panelborder.width}"
+								y2="#{linePoints.to.height + treeCreation.panelborder.height}"
+								stroke-width="2" />
+							
+						
+					</ui:repeat>	   
+				</g>  
+				
 				<ui:repeat var="personPos" value="#{treeCreation.personTree.personList}">
-					<circle fill="black"
+					<!-- <circle fill="black"
 						cx="#{personPos.position.width + treeCreation.panelborder.width}"
-						cy="${personPos.position.height + treeCreation.panelborder.height}" r="5" />
+						cy="${personPos.position.height + treeCreation.panelborder.height}" r="5" /> -->
 						
 					<text x="#{personPos.position.width + treeCreation.panelborder.width - treeCreation.elementdim.width / 2}"
 						y="#{personPos.position.height + treeCreation.panelborder.height}"
@@ -27,7 +41,7 @@
 						
      					#{personPos.name}
   					</text>
-				</ui:repeat>		      
+				</ui:repeat>				 
 		    </svg>			
 		</div>	
 	</div>

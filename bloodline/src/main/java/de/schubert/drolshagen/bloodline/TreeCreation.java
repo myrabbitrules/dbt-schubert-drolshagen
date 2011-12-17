@@ -68,19 +68,7 @@ public class TreeCreation {
 	public String createTree() {
 		setRoot(dataManager.getPerson(personId));
 		personTree = new PersonTree(rootPerson, elementDim, gapDim);
-		//calcPanelDim();
 		
-		
-	/*	JFrame f = new JFrame();
-		JPanel p = new TreePanel(person);
-		f.add(p);
-		f.pack();
-		//f.setVisible(true);
-		try {
-			saveToHDD(p, "datei");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} */
 		return "treeDisplay.jsf";
 	}	
 	

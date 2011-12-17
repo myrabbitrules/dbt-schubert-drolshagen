@@ -1,6 +1,7 @@
 package de.schubert.drolshagen.bloodline;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -49,13 +50,14 @@ public class PersonTree {
 	private Dimension elementDim;
 	private Dimension gapDim;
 	private List<PersonPos> personList;
+	private List<Line> linePoints;
 	
 	public PersonTree(Person rootPerson, Dimension elementDim, Dimension gapDim) {		
 		this.elementDim = elementDim;
 		this.gapDim = gapDim;
 		rootPersonPos = buildPersonPos(rootPerson, 0);
-		//printTree(rootPersonPos);
-		buildPersonList(rootPersonPos);		
+		buildPersonList(rootPersonPos);
+		buildLinePoints(personList);
 	}
 	
 	private PersonPos buildPersonPos(Person person, int height) {		
@@ -100,7 +102,7 @@ public class PersonTree {
 			}
 			
 			currPos++;
-		}	
+		}			
 				
 		/* remove unnecessary null elements */		
 		
@@ -117,7 +119,35 @@ public class PersonTree {
 			}
 		}			
 	}
+	
+	public void buildLinePoints(List<PersonPos> personList) {
+		linePoints = new ArrayList<Line>();
+		int j = 1;
+		for (int i = 0; j < personList.size(); i++) {
+			Dimension from = personList.get(i).position;
+			
+			if (personList.get(j) != null) {
+				Dimension toFirst = personList.get(j).position;
+				linePoints.add(new Line(from, toFirst));
+			}				
+			j++;
+			if (personList.get(j) != null) {
+				Dimension toSecond = personList.get(j).position;
+				linePoints.add(new Line(from, toSecond));
+			}
+			j++;			
+		}		
+	}
 		
+	public List<Line> getLinePoints() {
+		return linePoints;
+	}
+
+
+	public void setLinePoints(List<Line> linePoints) {
+		this.linePoints = linePoints;
+	}
+
 	public int getLevelCount() {
 		return (int) (Math.log(personList.size() + 1) / Math.log(2));
 	}
