@@ -11,9 +11,16 @@ import javax.persistence.Query;
 @Stateless // we want automatic transaction demarcation
 public class DataManager {
 
+	/**
+	 * @uml.property  name="em"
+	 * @uml.associationEnd  readOnly="true" multiplicity="(0 -1)" elementType="java.lang.String"
+	 */
 	@Inject
 	EntityManager em;
 
+	/**
+	 * @uml.property  name="logger"
+	 */
 	@Inject
 	Logger logger;
 

@@ -6,9 +6,13 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+/**
+ * A small Class for the GeneInfoID
+ * 
+ * @author Rene Drolshagen and Richard Schubert
+ */
 @Embeddable
 public class GeneInfoId implements Serializable {
-
 	private static final long serialVersionUID = 6781473968730496803L;
 
 	@OneToOne

@@ -10,12 +10,18 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ * Handels the PersonInsertion 
+ * 
+ * @author Rene Drolshagen and Richard Schubert
+ */
 @Named
 @RequestScoped
 public class PersonInsertion {
-	
 	public class DiseaseInfo {
-		
+		/**
+		 * The Disease which is represented with the defect x and xy Parts
+		 */
 		private Disease disease;
 		private boolean xDefective;
 		private boolean xyDefective;
@@ -24,6 +30,7 @@ public class PersonInsertion {
 			
 		}
 
+		
 		public boolean isxDefective() {
 			return xDefective;
 		}
@@ -53,31 +60,28 @@ public class PersonInsertion {
 	@Inject	
 	private DataManager dataManager;
 	
+	// The Data of a Person: Name, Surname etc.
 	private String surname;
-	
 	private String forename;
-	
 	private Date birthDate;
-	
 	private boolean isMale;
-		
-	private Integer fatherId;
 	
+	// The Information about the Parents of a Person
+	private Integer fatherId;
 	private Integer motherId;
 	
+	// The Birthdate of a Person
 	private Integer day;
-	
 	private Integer month;
-	
 	private Integer year;
 	
+	// The List of Diseases
 	private List<DiseaseInfo> diseaseInfos;
-
 
 	public List<DiseaseInfo> getDiseaseInfos() {
 		return diseaseInfos;
 	}
-
+	
 	public void setDiseaseInfos(List<DiseaseInfo> diseaseInfos) {
 		this.diseaseInfos = diseaseInfos;
 	}
@@ -106,6 +110,9 @@ public class PersonInsertion {
 		this.year = year;
 	}
 	
+	/**
+	 * Initialises a new Disease List
+	 */
 	@PostConstruct
 	public void init() {
 		diseaseInfos = new ArrayList<PersonInsertion.DiseaseInfo>();
@@ -116,6 +123,10 @@ public class PersonInsertion {
 		}
 	}
 
+	/**
+	 * Creates a Person with the stored Information
+	 * @return null
+	 */
 	public String createPerson() {
 		Person person = new Person();
 		person.setForename(forename);
@@ -191,6 +202,4 @@ public class PersonInsertion {
 	public void setMotherId(Integer motherId) {
 		this.motherId = motherId;
 	}
-	
-	
 }

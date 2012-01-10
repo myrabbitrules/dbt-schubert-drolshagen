@@ -16,12 +16,22 @@ public class GeneInfo {
 	
 	public static final String QUERY_GET_ALL_BY_PERSON = "GeneInfo.getAllByPerson" ;
 
+	/**
+	 * @uml.property  name="id"
+	 * @uml.associationEnd  
+	 */
 	@EmbeddedId
 	private GeneInfoId id;
 	
+	/**
+	 * @uml.property  name="xDefective"
+	 */
 	@Column(name = "x_defective", nullable = false)
 	private boolean xDefective;
 	
+	/**
+	 * @uml.property  name="xyDefective"
+	 */
 	@Column(name = "xy_defective", nullable = false)
 	private boolean xyDefective;
 	
@@ -38,26 +48,50 @@ public class GeneInfo {
 		this.xyDefective = xyDefective;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="id"
+	 */
 	public GeneInfoId getId() {
 		return id;
 	}
 
+	/**
+	 * @param id
+	 * @uml.property  name="id"
+	 */
 	public void setId(GeneInfoId id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="xDefective"
+	 */
 	public boolean isxDefective() {
 		return xDefective;
 	}
 
+	/**
+	 * @param xDefective
+	 * @uml.property  name="xDefective"
+	 */
 	public void setxDefective(boolean xDefective) {
 		this.xDefective = xDefective;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="xyDefective"
+	 */
 	public boolean isXyDefective() {
 		return xyDefective;
 	}
 
+	/**
+	 * @param xyDefective
+	 * @uml.property  name="xyDefective"
+	 */
 	public void setXyDefective(boolean xyDefective) {
 		this.xyDefective = xyDefective;
 	}

@@ -11,16 +11,20 @@ import javax.persistence.PersistenceContext;
 /**
  * Provides resources for simple CDI injection.
  * 
- * @author Richard Schubert
+ * @author Rene Drolshagen and Richard Schubert
  */
 public class Resources {
-
 	@SuppressWarnings("unused")
 	@PersistenceContext
 	@Produces
 	@Dependent
 	private EntityManager em;
 	
+	/**
+	 * Saves information in the JBoss Log
+	 * @param injectionPoint The Point where the Information should be stored
+	 * @return The Logger with the logged Information
+	 */
 	@Produces
 	@Dependent
 	Logger getLogger(InjectionPoint injectionPoint) {

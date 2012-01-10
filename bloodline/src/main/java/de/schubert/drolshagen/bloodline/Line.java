@@ -2,21 +2,31 @@ package de.schubert.drolshagen.bloodline;
 
 import java.awt.Dimension;
 
+/**
+ * Represents a Line in the Family Tree
+ * 
+ * @author Rene Drolshagen and Richard Schubert
+ */
 public class Line {
 	private Dimension from;
 	private Dimension to;
+	
 	public Dimension getFrom() {
 		return from;
 	}
+
 	public void setFrom(Dimension from) {
 		this.from = from;
 	}
+
 	public Dimension getTo() {
 		return to;
 	}
+
 	public void setTo(Dimension to) {
 		this.to = to;
 	}
+	
 	public Line(Dimension from, Dimension to) {
 		super();
 		this.from = from;
