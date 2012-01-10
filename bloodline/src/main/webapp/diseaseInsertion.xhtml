@@ -9,6 +9,14 @@
 	<h:outputStylesheet name="css/screen.css" />
 </h:head>
 <h:body>
+	<a href="personInsertion.jsf">Personen anlegen</a>
+	<a href="treeCreation.jsf">Baum anzeigen</a>
+	<h:form style="display: inline">
+		<h:messages />
+		<h:commandButton action="#{login.logout}" value="logout" rendered="#{login.loggedIn}" />
+	</h:form>
+	<br/>
+	<br/>
 	<div id="container">
 		<div id="content">
 			<h:messages globalOnly="true"/>

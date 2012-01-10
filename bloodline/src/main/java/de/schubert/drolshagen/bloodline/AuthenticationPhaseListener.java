@@ -78,7 +78,7 @@ public class AuthenticationPhaseListener implements PhaseListener {
 		if (viewId == null) {
 			return false;
 		}
-		return viewId.equals("/home.xhtml");
+		return ! (viewId.equals("/login.xhtml") || viewId.equals("/registration.xhtml"));
 	}
 
 	/**

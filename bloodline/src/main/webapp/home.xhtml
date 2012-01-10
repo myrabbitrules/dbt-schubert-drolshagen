@@ -6,6 +6,11 @@
 	template="/WEB-INF/templates/default.xhtml">
 	<!-- display content of template -->
 	<ui:define name="content">	<!-- insert this into template where matching insert tags are found -->
+		<a href="diseaseInsertion.jsf">Krankheiten anlegen</a>	
+		<a href="personInsertion.jsf">Personen anlegen</a>
+		<a href="treeCreation.jsf">Baum anzeigen</a>
+		<br/>
+		<br/>
 		<h:form>
 			<h:messages />
 			<h:commandButton action="#{login.logout}" value="logout" rendered="#{login.loggedIn}" />

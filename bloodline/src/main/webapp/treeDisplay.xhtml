@@ -10,6 +10,14 @@
 	<h:outputStylesheet name="css/screen.css" />
 </h:head>
 <h:body>
+	<a href="diseaseInsertion.jsf">Krankheiten anlegen</a>	
+	<a href="personInsertion.jsf">Personen anlegen</a>
+	<h:form style="display: inline">
+		<h:messages />
+		<h:commandButton action="#{login.logout}" value="logout" rendered="#{login.loggedIn}" />
+	</h:form>
+	<br/>
+	<br/>
 	<div id="container">
 		<div id="content">
 			<svg xmlns="http://www.w3.org/2000/svg" 
@@ -45,5 +53,6 @@
 		    </svg>			
 		</div>	
 	</div>
+	<a href="treeCreation.jsf">Zurück</a>
 </h:body>
 </html>
