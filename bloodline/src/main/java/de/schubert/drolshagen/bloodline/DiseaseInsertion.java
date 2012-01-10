@@ -4,10 +4,18 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ * @author Richard Schubert, Rene Drolshagen
+ * 
+ * Backing bean for one request with which the user can add a new disease to the database.
+ */
 @Named
 @RequestScoped
 public class DiseaseInsertion {
 	
+	/**
+	 * Provides access to the database.
+	 */
 	@Inject
 	DataManager dataManager;
 	
@@ -27,6 +35,10 @@ public class DiseaseInsertion {
 		this.dominant = dominant;
 	}
 	
+	/**
+	 * Inserts the disease specified by the set class attributes to the database if a disease
+	 * with the same name does not already exist.
+	 */
 	public void insert() {
 		Disease disease = new Disease(name, dominant);
 		dataManager.addDisease(disease);

@@ -10,11 +10,30 @@ import javax.inject.Named;
 
 @Named
 @RequestScoped
+/** 
+ * @author Richard Schubert and Rene Drolshagen
+ *
+ * This backing bean provides methods for calculating the propabilities with which people
+ * inherit specified diseases from their parents. The two parents have to be specified and the calculations
+ * are done for the specified parents within one http request.
+ */
 public class DiseaseCalc {
 	
+	/**
+	 * An object of this class contains the propabilities with which a person has a specified
+	 * disease if the person is male or female.
+	 */
 	public class DiseaseResult {
 		private Disease disease;
+		
+		/**
+		 * The propability with which the person has the specified disease if he is male.
+		 */
 		private double malePropability;
+		
+		/**
+		 * The propability with which the person has the specified disease if she is female.
+		 */
 		private double femalePropability;
 		
 		public DiseaseResult() {
@@ -51,9 +70,19 @@ public class DiseaseCalc {
 	
 	private List<DiseaseResult> diseaseResults;
 
+	/**
+	 * The id of the father of the person for which diseases are to be calculated.
+	 */
 	private Integer fatherId;
+	
+	/**
+	 * The id of the mother of the person for which diseases are to be calculated.
+	 */
 	private Integer motherId;
 	
+	/**
+	 * Initializes this backing bean.
+	 */
 	@PostConstruct
 	public void init() {
 		diseaseResults = new ArrayList<DiseaseCalc.DiseaseResult>();
@@ -80,6 +109,10 @@ public class DiseaseCalc {
 		this.diseaseResults = diseaseResults;
 	}
 
+	/**
+	 * Fills the list describing the possibilities for which the child of the two specified
+	 * parents inherits diseases.
+	 */
 	public void calcDiseases() {
 		Person father = dataManager.getPerson(fatherId);
 		Person mother = dataManager.getPerson(motherId);

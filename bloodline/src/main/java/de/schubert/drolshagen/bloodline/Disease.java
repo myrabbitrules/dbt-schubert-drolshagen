@@ -8,6 +8,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+/**
+ * An entity representing a disease. A disease is either
+ * dominant or recessive.
+ * 
+ * @author Richard Schubert and Rene Drolshagen
+ */
 @Table(name = "disease")
 @Entity
 @NamedQueries({
@@ -27,15 +33,26 @@ public class Disease {
 	@Column(name = "name", nullable = false)
 	private String name;
 	
+	/**
+	 * True if this disease is dominant, otherwise false.
+	 */
 	@Column(name = "dominant", nullable = false)
 	private boolean dominant;
 		
+	/**
+	 * Creates a new disease with a specified name that is either dominant or recessive.
+	 * @param name the name of the disease
+	 * @param dominant true if the disease is to be dominant, false if the disease is to be recessive
+	 */
 	public Disease(String name, boolean dominant) {
 		super();
 		this.name = name;
 		this.dominant = dominant;
 	}
 	
+	/**
+	 * Needed by JPA for storing objects of this entity.
+	 */
 	public Disease() {
 		
 	}

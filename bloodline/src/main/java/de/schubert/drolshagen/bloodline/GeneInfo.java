@@ -7,6 +7,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+/**
+ * @author Richard Schubert, Rene Drolshagen
+ *
+ * An entity describing a specified disease that a specified person has.
+ * It is used as an in-between entity to provide an n-to-m relationship between the entities person and disease.
+ * Infos contain the gene locations of the disease.
+ */
 @Table(name = "gene_info")
 @Entity
 @NamedQueries({
@@ -19,9 +26,19 @@ public class GeneInfo {
 	@EmbeddedId
 	private GeneInfoId id;
 	
+	/**
+	 * True if the person's first x chromosome contains the disease.
+	 */
 	@Column(name = "x_defective", nullable = false)
 	private boolean xDefective;
 	
+	/**
+	 * If the person is male: This attribute is true if the person's y-chromosome
+	 * contains the disease, otherwise it is false.
+	 * 
+	 * If the person is female: This attribute is true if the person's second x-chromosome
+	 * contains the disease, otherwise it is false.
+	 */
 	@Column(name = "xy_defective", nullable = false)
 	private boolean xyDefective;
 	
@@ -29,6 +46,9 @@ public class GeneInfo {
 		
 	}
 	
+	/**
+	 * Creates a new gene info object.
+	 */
 	public GeneInfo(Person person, Disease disease, boolean xDefective, boolean xyDefective) {
 		GeneInfoId id = new GeneInfoId();
 		id.setPerson(person);

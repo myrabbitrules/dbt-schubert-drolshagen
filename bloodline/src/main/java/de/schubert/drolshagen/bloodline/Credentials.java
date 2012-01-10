@@ -6,6 +6,11 @@ import javax.validation.constraints.*;
 
 @RequestScoped
 @Named
+/**
+ * @author Richard Schubert and Rene Drolshagen
+ *
+ * User login data for use in login backing bean.
+ */
 public class Credentials {
 	
 	@NotNull(message = "Please enter username.")
