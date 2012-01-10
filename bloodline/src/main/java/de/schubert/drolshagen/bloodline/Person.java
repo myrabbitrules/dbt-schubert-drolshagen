@@ -13,10 +13,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * Represents a Person in the Database
+ * 
+ * @author Rene Drolshagen and Richard Schubert
+ */
 @Table(name = "person")
 @Entity
 public class Person {
-
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
@@ -43,6 +47,15 @@ public class Person {
 	@JoinColumn(name = "mother")
 	private Person mother;
 
+	/**
+	 * Generates a new Person which will be stored in the Database with the following Information
+	 * @param sirname The Surname of a Person
+	 * @param forename The Forname of a Person
+	 * @param birthDate The Birthdate of a Person
+	 * @param isMale If a Person is Male (boolean)
+	 * @param father The PersonID of the Father
+	 * @param mother The PersonID of the Mother
+	 */
 	public Person(String sirname, String forename, Date birthDate,
 			boolean isMale, Person father, Person mother) {
 		super();
@@ -114,10 +127,16 @@ public class Person {
 		this.mother = mother;
 	}
 
+	/**
+	 * @return If the Person has a father
+	 */
 	public boolean hasFather() {
 		return father != null;
 	}
-
+	
+	/**
+	 * @return If the Person has a mother
+	 */
 	public boolean hasMother() {
 		return mother != null;
 	}
@@ -127,6 +146,10 @@ public class Person {
 		return "(" + forename + " " + sirname + ")";
 	}
 
+	/**
+	 * Checks if a Person equals another Person
+	 * @return Boolean value with the Value of the equal
+	 */
 	@Override
 	public boolean equals(Object other) {
 		if (!(other instanceof Person)) {
@@ -143,6 +166,10 @@ public class Person {
 		return forename.hashCode() + sirname.hashCode() + birthDate.hashCode();
 	}
 
+	/**
+	 * Calculates the depth of the Tree (for the .jpeg way)
+	 * @return The depth in px
+	 */
 	public int calcDepth() {
 		// Nimmt die Personen welche verwandt sind einfach als folgende an
 		int lDepth = 0;

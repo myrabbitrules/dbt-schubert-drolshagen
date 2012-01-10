@@ -25,11 +25,17 @@ public class Disease {
 	public static final String QUERY_GET_BY_ID = "Disease.getById";
 	public static final String QUERY_GET_ALL = "Disease.getAll";
 	
+	/**
+	 * @uml.property  name="id"
+	 */
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
 	
+	/**
+	 * @uml.property  name="name"
+	 */
 	@Column(name = "name", nullable = false)
 	private String name;
 	
@@ -57,26 +63,50 @@ public class Disease {
 		
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="id"
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * @param id
+	 * @uml.property  name="id"
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="name"
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @param name
+	 * @uml.property  name="name"
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="dominant"
+	 */
 	public boolean isDominant() {
 		return dominant;
 	}
 
+	/**
+	 * @param dominant
+	 * @uml.property  name="dominant"
+	 */
 	public void setDominant(boolean dominant) {
 		this.dominant = dominant;
 	}

@@ -3,15 +3,16 @@ package de.schubert.drolshagen.bloodline;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Date;
 
-
+/**
+ * Handles the complete Login
+ * 
+ * @author Rene Drolshagen and Richard Schubert
+ */
 @SessionScoped
 @Named
 public class Login implements Serializable {
@@ -23,15 +24,24 @@ public class Login implements Serializable {
 	 */
 	public static final String LOGGED_IN_USER_KEY = "de.schubert.drolshagen.bloodline.loggedin";
 	
+	/**
+	 * @uml.property  name="dataManager"
+	 * @uml.associationEnd  readOnly="true"
+	 */
 	@Inject	
 	private DataManager dataManager;
 	
+	/**
+	 * @uml.property  name="credentials"
+	 * @uml.associationEnd  readOnly="true"
+	 */
 	@Inject
 	private Credentials credentials;
 
 	/**
-	 * The logged in user of the session this object belongs to or null if user
-	 * has not logged in.
+	 * The logged in user of the session this object belongs to or null if user has not logged in.
+	 * @uml.property  name="loggedInUser"
+	 * @uml.associationEnd  
 	 */
 	private User loggedInUser;
 
