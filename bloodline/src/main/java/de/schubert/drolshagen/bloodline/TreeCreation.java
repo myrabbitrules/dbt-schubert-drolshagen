@@ -115,6 +115,9 @@ public class TreeCreation {
 	 * @return The Page where the tree will be shown
 	 */
 	public String createTree() {
+		if(dataManager.getPerson(personId) == null) {
+			return "treeCreation.jsf";
+		}
 		setRoot(dataManager.getPerson(personId));
 		personTree = new PersonTree(rootPerson, elementDim, gapDim);
 		
